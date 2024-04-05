@@ -6,16 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description');
+            $table->string('image');
+            $table->string('email');
+            $table->string('password');
+            $table->string('profession');
+            $table->string('admin');
+            $table->string('web_site')->nullable();
             $table->boolean('approved')->default(false);
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

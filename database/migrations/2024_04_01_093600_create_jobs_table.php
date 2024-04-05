@@ -11,12 +11,21 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('company_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('name');
+            $table->string('company_name')->nullable();
             $table->string('profession');
-            $table->string('experience');
+            $table->string('type');
             $table->string('address');
             $table->integer('pay');
-            $table->text('description');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('experience');
+            $table->text('information')->nullable();
+            $table->string('language');
+            $table->integer('number')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
