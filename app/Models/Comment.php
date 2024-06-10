@@ -9,12 +9,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Comment extends Model
 {
 
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    protected $hidden = [
+        'job_id',
+    ];
 
+    public function company():BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
     public function job(): BelongsTo
     {
         return $this->belongsTo(Jobs::class);

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('number')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

@@ -10,6 +10,8 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function jobs(): HasMany
     {
         return $this->hasMany(Jobs::class);
@@ -18,6 +20,10 @@ class Company extends Model
     public function phones(): HasMany
     {
         return $this->hasMany(Phone::class);
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 }
