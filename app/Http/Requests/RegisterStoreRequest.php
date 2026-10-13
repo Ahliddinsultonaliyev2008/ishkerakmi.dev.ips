@@ -17,7 +17,7 @@ class RegisterStoreRequest extends FormRequest
     {
         return [
             'firstname' => 'required|string|max:30|min:2',
-            'phone' => 'required|numeric|max_digits:9|min_digits:9',
+            'phone' => 'required|numeric|max_digits:9|min_digits:9|unique:phones,phone',
             'password' => 'required|string|confirmed|min:8|max:24'
         ];
     }

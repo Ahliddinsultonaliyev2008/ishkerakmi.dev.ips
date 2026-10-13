@@ -39,7 +39,7 @@ class LoginCompanyService
             'success' => true,
             'message' => "Company login success",
             'company' => $company->id,
-        ], 201);
+        ]);
 
     }
 

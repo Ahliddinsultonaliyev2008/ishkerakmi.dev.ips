@@ -17,7 +17,7 @@ class LoginCompanyRequest extends FormRequest
     {
         return [
             'password' => 'required|string|min:6|max:24',
-            'admin' => 'required|string|max:25|min_digits:4'
+            'admin' => 'required|string|min:4|max:25'
         ];
     }
 

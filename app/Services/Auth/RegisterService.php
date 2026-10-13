@@ -4,6 +4,7 @@ namespace App\Services\Auth;
 
 use App\Models\Phone;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterService
@@ -23,23 +24,19 @@ class RegisterService
      */
     public function registerUser(array $data): bool|User
     {
-        $user = User::create([
-            'firstname' => $data["firstname"],
-            'password'  => Hash::make($data['password'])
-        ]);
-        if (!$user ->exists)
-            return false;
+        return DB::transaction(function () use ($data) {
+            $user = User::create([
+                'firstname' => $data['firstname'],
+                'password' => Hash::make($data['password'])
+            ]);
 
-        /** @var Phone $phone */
-        $phone  = Phone::create([
-            'user_id' => $user->id,
-            'phone' =>$data['phone']
-        ]);
+            Phone::create([
+                'user_id' => $user->id,
+                'phone' => $data['phone']
+            ]);
 
-        if (!$phone ->exists)
-            return false;
-
-        return $user;
+            return $user;
+        });
     }
 
 }

@@ -15,7 +15,7 @@ class ResumeComment extends Controller
 
     function index(Request $request)
     {
-        return $this -> resumeCommentServise ->index($request ->post());
+        return $this -> resumeCommentServise ->index($request->all());
     }
 
     function store(Request $request)

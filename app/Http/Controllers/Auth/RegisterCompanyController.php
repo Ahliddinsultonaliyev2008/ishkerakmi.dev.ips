@@ -26,7 +26,6 @@ class RegisterCompanyController extends Controller
         return response()->json([
             'success' => true,
             'message' => "Company Register success",
-            'password' => $company->password,
             'login' => $company->admin,
         ], 201);
     }

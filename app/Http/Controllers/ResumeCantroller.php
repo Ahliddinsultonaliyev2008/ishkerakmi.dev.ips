@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResumeRequest;
 use App\Services\ResumeServices;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ResumeCantroller extends Controller
 {
@@ -14,25 +14,26 @@ class ResumeCantroller extends Controller
 
     function show($id): JsonResponse
     {
-        return $this ->resumeServices ->show($id);
+        return $this->resumeServices->show($id);
     }
 
     function all(): JsonResponse
     {
-        return $this ->resumeServices ->all();
+        return $this->resumeServices->all();
     }
 
-    function store(Request $request): JsonResponse
+    function store(ResumeRequest $request): JsonResponse
     {
-        return $this->resumeServices->store($request ->post());
+        return $this->resumeServices->store($request->validated());
     }
 
-    function update (Request $request, $id): JsonResponse
+    function update(ResumeRequest $request, $id): JsonResponse
     {
-        return $this->resumeServices->update($request ->post(), $id);
+        return $this->resumeServices->update($request->validated(), $id);
     }
+
     function destroy($id): JsonResponse
     {
-        return $this ->resumeServices ->destroy($id);
+        return $this->resumeServices->destroy($id);
     }
 }
