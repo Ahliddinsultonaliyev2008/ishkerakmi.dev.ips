@@ -2,42 +2,41 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
+use App\Enums\Currency;
+use App\Enums\EmploymentType;
+use App\Enums\Experience;
+use App\Http\Requests\Concerns\NormalizesPhone;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class ResumeRequest extends FormRequest
 {
-    public function authorize(): bool
+    use NormalizesPhone;
+
+    protected function prepareForValidation(): void
     {
-        return true;
+        $this->merge(['phone' => $this->normalizePhone($this->input('phone'))]);
     }
 
     public function rules(): array
     {
         return [
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'profession' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'gender' => 'required|string|max:255',
-            'experience' => 'required|string|max:255',
-            'pay' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'title' => ['required', 'string', 'max:255'],
+            'category_id' => ['nullable', 'exists:categories,id'],
+            'full_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'regex:/^\+998\d{9}$/'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'city' => ['required', 'string', 'max:100'],
+            'birth_date' => ['nullable', 'date', 'before:-14 years'],
+            'gender' => ['nullable', Rule::in(['male', 'female'])],
+            'employment_type' => ['required', Rule::enum(EmploymentType::class)],
+            'experience' => ['required', Rule::enum(Experience::class)],
+            'salary_expected' => ['nullable', 'integer', 'min:0'],
+            'currency' => ['sometimes', Rule::enum(Currency::class)],
+            'skills' => ['nullable', 'array', 'max:30'],
+            'skills.*' => ['string', 'max:50'],
+            'about' => ['nullable', 'string', 'max:5000'],
+            'is_public' => ['sometimes', 'boolean'],
         ];
-    }
-
-    /**
-     * @throws HttpResponseException
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'success' => false,
-            'error' => $validator->errors()
-        ], 422));
     }
 }

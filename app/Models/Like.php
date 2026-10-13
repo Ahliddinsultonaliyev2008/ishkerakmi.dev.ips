@@ -2,22 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+#[Fillable(['user_id'])]
 class Like extends Model
 {
-    protected $guarded =['id', 'created_at', 'updated_at',];
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function job():BelongsTo
+
+    public function likeable(): MorphTo
     {
-        return $this->belongsTo(Jobs::class);
-    }
-    public function resume():BelongsTo
-    {
-        return $this->belongsTo(Resume::class);
+        return $this->morphTo();
     }
 }

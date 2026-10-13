@@ -2,36 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+#[Fillable(['user_id', 'body'])]
 class Comment extends Model
 {
-
-    protected $guarded = ['id', 'created_at', 'updated_at'];
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    protected $hidden = [
-        'job_id',
-    ];
-
-    public function company():BelongsTo
+    public function commentable(): MorphTo
     {
-        return $this->belongsTo(Company::class);
+        return $this->morphTo();
     }
-    public function job(): BelongsTo
-    {
-        return $this->belongsTo(Jobs::class);
-    }
-
-    public function resume(): BelongsTo
-    {
-        return $this->belongsTo(Resume::class);
-    }
-
 }
