@@ -6,6 +6,7 @@ import ResumeCard from '../components/ResumeCard.vue';
 import Pagination from '../components/Pagination.vue';
 import Spinner from '../components/Spinner.vue';
 import EmptyState from '../components/EmptyState.vue';
+import SearchInput from '../components/SearchInput.vue';
 
 const meta = useMetaStore();
 const filters = reactive({ q: '', city: '', category: '', experience: '' });
@@ -25,7 +26,7 @@ async function load(page = 1) {
 let timer;
 watch(filters, () => {
     clearTimeout(timer);
-    timer = setTimeout(() => load(1), 300);
+    timer = setTimeout(() => load(1), 150);
 });
 onMounted(() => {
     meta.load();
@@ -35,10 +36,10 @@ onMounted(() => {
 
 <template>
     <div class="mx-auto max-w-6xl px-4 py-10">
-        <h1 class="text-3xl font-bold text-slate-900">Rezyumelar</h1>
+        <h1 class="font-display text-3xl font-bold text-lapis-900">Rezyumelar</h1>
         <p class="mt-1 text-slate-500">{{ pagination?.total ?? 0 }} ta nomzod</p>
         <div class="card mt-6 grid gap-3 p-4 md:grid-cols-4">
-            <input v-model="filters.q" class="input" placeholder="Lavozim yoki ko'nikma" />
+            <SearchInput v-model="filters.q" placeholder="Lavozim yoki ko'nikma" />
             <select v-model="filters.city" class="input">
                 <option value="">Barcha shaharlar</option>
                 <option v-for="c in meta.cities" :key="c" :value="c">{{ c }}</option>

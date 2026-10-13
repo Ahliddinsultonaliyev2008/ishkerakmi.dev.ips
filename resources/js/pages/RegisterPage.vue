@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { validationErrors, errorMessage } from '../api';
+import AuthShell from '../components/AuthShell.vue';
 
 const auth = useAuthStore();
 const router = useRouter();
@@ -37,17 +38,18 @@ async function submit() {
 </script>
 
 <template>
-    <div class="mx-auto max-w-lg px-4 py-16">
-        <div class="card p-8">
-            <h1 class="text-2xl font-bold text-slate-900">Ro'yxatdan o'tish</h1>
-            <p class="mt-1 text-sm text-slate-500">Hisobingiz bormi? <RouterLink to="/login" class="font-medium text-brand-600">Kirish</RouterLink></p>
+    <AuthShell title="Ro'yxatdan o'tish">
+        <template #sub>
+            <p class="mt-1 text-sm text-slate-500">Hisobingiz bormi? <RouterLink to="/login" class="font-semibold text-brand-600 hover:underline">Kirish</RouterLink></p>
+        </template>
+        <div>
             <div class="mt-6 grid grid-cols-2 gap-2 rounded-xl bg-slate-100 p-1">
                 <button
                     v-for="r in [{ v: 'seeker', l: '👤 Ish izlayman' }, { v: 'employer', l: '🏢 Xodim izlayman' }]"
                     :key="r.v"
                     type="button"
                     class="rounded-lg py-2 text-sm font-semibold transition"
-                    :class="form.role === r.v ? 'bg-white text-brand-700 shadow' : 'text-slate-500'"
+                    :class="form.role === r.v ? 'bg-white text-brand-700 shadow ring-1 ring-gold-300' : 'text-slate-500'"
                     @click="form.role = r.v"
                 >
                     {{ r.l }}
@@ -91,7 +93,7 @@ async function submit() {
                 <button class="btn-primary w-full py-3" :disabled="loading">{{ loading ? 'Yuborilmoqda...' : "Ro'yxatdan o'tish" }}</button>
             </form>
         </div>
-    </div>
+    </AuthShell>
 </template>
 
 <style scoped>

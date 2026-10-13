@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { errorMessage } from '../api';
+import AuthShell from '../components/AuthShell.vue';
 
 const auth = useAuthStore();
 const router = useRouter();
@@ -23,37 +24,27 @@ async function submit() {
         loading.value = false;
     }
 }
-
-function demo(phone) {
-    form.value = { phone, password: 'password' };
-    submit();
-}
 </script>
 
 <template>
-    <div class="mx-auto max-w-md px-4 py-16">
-        <div class="card p-8">
-            <h1 class="text-2xl font-bold text-slate-900">Tizimga kirish</h1>
-            <p class="mt-1 text-sm text-slate-500">Hisobingiz yo'qmi? <RouterLink to="/register" class="font-medium text-brand-600">Ro'yxatdan o'ting</RouterLink></p>
-            <form class="mt-6 space-y-4" @submit.prevent="submit">
-                <div>
-                    <label class="label">Telefon raqam</label>
-                    <input v-model="form.phone" class="input" placeholder="+998 90 123 45 67" required autocomplete="tel" />
-                </div>
-                <div>
-                    <label class="label">Parol</label>
-                    <input v-model="form.password" type="password" class="input" required autocomplete="current-password" />
-                </div>
-                <p v-if="error" class="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{{ error }}</p>
-                <button class="btn-primary w-full py-3" :disabled="loading">{{ loading ? 'Kirilmoqda...' : 'Kirish' }}</button>
-            </form>
-            <div class="mt-6 rounded-xl bg-slate-50 p-4 text-sm">
-                <div class="font-semibold text-slate-700">Demo hisoblar (parol: password)</div>
-                <div class="mt-2 flex flex-wrap gap-2">
-                    <button class="btn-ghost py-1.5 text-xs" @click="demo('+998901111111')">Ish izlovchi</button>
-                    <button class="btn-ghost py-1.5 text-xs" @click="demo('+998902222222')">Ish beruvchi</button>
-                </div>
+    <AuthShell title="Xush kelibsiz!">
+        <template #sub>
+            <p class="mt-1 text-sm text-slate-500">
+                Hisobingiz yo'qmi?
+                <RouterLink to="/register" class="font-semibold text-brand-600 hover:underline">Ro'yxatdan o'ting</RouterLink>
+            </p>
+        </template>
+        <form class="mt-8 space-y-4" @submit.prevent="submit">
+            <div>
+                <label class="label">Telefon raqam</label>
+                <input v-model="form.phone" class="input" placeholder="+998 90 123 45 67" required autocomplete="tel" inputmode="tel" />
             </div>
-        </div>
-    </div>
+            <div>
+                <label class="label">Parol</label>
+                <input v-model="form.password" type="password" class="input" placeholder="Parolingizni kiriting" required autocomplete="current-password" />
+            </div>
+            <p v-if="error" class="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{{ error }}</p>
+            <button class="btn-primary w-full py-3" :disabled="loading">{{ loading ? 'Kirilmoqda...' : 'Kirish' }}</button>
+        </form>
+    </AuthShell>
 </template>

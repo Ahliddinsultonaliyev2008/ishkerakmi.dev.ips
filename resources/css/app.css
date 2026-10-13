@@ -4,12 +4,34 @@
 @source '../js/**/*.{js,vue}';
 
 @theme {
-    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-    --color-brand-50: #eef6ff;
-    --color-brand-100: #d9eaff;
-    --color-brand-500: #2f7bf5;
-    --color-brand-600: #1f63e0;
-    --color-brand-700: #1a50b5;
+    --font-sans: 'Manrope', 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --font-display: 'Unbounded', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+    /* Firuza (Samarqand gumbazlari) */
+    --color-brand-50: #ecfafc;
+    --color-brand-100: #cff2f7;
+    --color-brand-200: #a3e3ee;
+    --color-brand-300: #67cde0;
+    --color-brand-400: #2eb2cc;
+    --color-brand-500: #1496b3;
+    --color-brand-600: #0b7896;
+    --color-brand-700: #0c5f7a;
+    --color-brand-800: #104e64;
+    --color-brand-900: #0f3f52;
+
+    /* Lojuvard (lapis) */
+    --color-lapis-700: #123c7a;
+    --color-lapis-800: #0e2f61;
+    --color-lapis-900: #0a2148;
+
+    /* Oltin */
+    --color-gold-50: #fdf8eb;
+    --color-gold-100: #faedc8;
+    --color-gold-300: #f2c14e;
+    --color-gold-400: #e8b236;
+    --color-gold-500: #e0a526;
+    --color-gold-600: #b8841a;
+    --color-gold-700: #8f6414;
 }
 
 @utility btn {
@@ -17,11 +39,15 @@
 }
 
 @utility btn-primary {
-    @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700;
+    @apply btn bg-brand-600 text-white shadow-sm shadow-brand-600/20 hover:bg-brand-700;
+}
+
+@utility btn-gold {
+    @apply btn bg-gold-400 text-lapis-900 shadow-sm shadow-gold-500/30 hover:bg-gold-300;
 }
 
 @utility btn-ghost {
-    @apply btn border border-slate-200 bg-white text-slate-700 hover:bg-slate-50;
+    @apply btn border border-slate-200 bg-white text-slate-700 hover:border-brand-200 hover:bg-brand-50;
 }
 
 @utility btn-danger {
@@ -29,7 +55,7 @@
 }
 
 @utility card {
-    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+    @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm;
 }
 
 @utility input {
@@ -41,5 +67,22 @@
 }
 
 @utility chip {
-    @apply inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600;
+    @apply inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600;
+}
+
+/* Girih — o'zbek me'morchiligidagi geometrik naqsh */
+@utility bg-girih {
+    background-image: url('/images/girih.svg');
+    background-size: 96px 96px;
+}
+
+/* Atlas/adras uslubidagi bezak chizig'i */
+@utility atlas-strip {
+    background-image: url('/images/atlas.svg');
+    background-size: 48px 100%;
+    background-repeat: repeat-x;
+}
+
+@utility font-display {
+    font-family: var(--font-display);
 }

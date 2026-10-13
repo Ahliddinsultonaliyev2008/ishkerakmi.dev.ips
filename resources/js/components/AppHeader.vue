@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { initials } from '../format';
+import AppLogo from './AppLogo.vue';
 
 const auth = useAuthStore();
 const router = useRouter();
@@ -17,11 +18,11 @@ async function logout() {
 </script>
 
 <template>
-    <header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/85 backdrop-blur">
-        <div class="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4">
-            <RouterLink to="/" class="flex items-center gap-2 text-lg font-extrabold tracking-tight text-slate-900">
-                <span class="grid h-9 w-9 place-items-center rounded-xl bg-brand-600 text-white">IK</span>
-                Ish kerakmi<span class="text-brand-600">.uz</span>
+    <header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/90 backdrop-blur">
+        <div class="atlas-strip h-1.5"></div>
+        <div class="mx-auto flex h-[4.25rem] max-w-6xl items-center gap-6 px-4">
+            <RouterLink to="/" aria-label="IshKerakmi bosh sahifa">
+                <AppLogo />
             </RouterLink>
 
             <nav class="hidden items-center gap-1 text-sm font-medium md:flex">
@@ -40,7 +41,7 @@ async function logout() {
                     <RouterLink v-else to="/my/resumes/new" class="btn-primary">+ Rezyume yaratish</RouterLink>
                     <div class="relative">
                         <button class="flex items-center gap-2 rounded-xl p-1.5 hover:bg-slate-100" @click="menu = !menu">
-                            <span class="grid h-9 w-9 place-items-center rounded-full bg-brand-100 text-sm font-bold text-brand-700">
+                            <span class="grid h-9 w-9 place-items-center rounded-full bg-gold-100 text-sm font-bold text-gold-700 ring-2 ring-gold-300/60">
                                 {{ initials(auth.user.name) }}
                             </span>
                         </button>
@@ -95,7 +96,7 @@ async function logout() {
     @apply rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900;
 }
 .nav-link.router-link-active {
-    @apply text-brand-600;
+    @apply bg-brand-50 text-brand-700;
 }
 .menu-link {
     @apply block rounded-lg px-3 py-2 text-slate-700 hover:bg-slate-100;

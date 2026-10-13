@@ -5,6 +5,7 @@ import CompanyLogo from '../components/CompanyLogo.vue';
 import Pagination from '../components/Pagination.vue';
 import Spinner from '../components/Spinner.vue';
 import EmptyState from '../components/EmptyState.vue';
+import SearchInput from '../components/SearchInput.vue';
 
 const companies = ref([]);
 const pagination = ref(null);
@@ -19,11 +20,7 @@ async function load(page = 1) {
     loading.value = false;
 }
 
-let timer;
-watch(q, () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => load(1), 300);
-});
+watch(q, () => load(1));
 onMounted(load);
 </script>
 
@@ -31,10 +28,10 @@ onMounted(load);
     <div class="mx-auto max-w-6xl px-4 py-10">
         <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">Kompaniyalar</h1>
+                <h1 class="font-display text-3xl font-bold text-lapis-900">Kompaniyalar</h1>
                 <p class="mt-1 text-slate-500">Ish beruvchilar bilan tanishing</p>
             </div>
-            <input v-model="q" class="input md:w-80" placeholder="Kompaniya nomi..." />
+            <SearchInput v-model="q" class="md:w-80" placeholder="Kompaniya nomi" />
         </div>
         <Spinner v-if="loading" />
         <EmptyState v-else-if="!companies.length" title="Kompaniya topilmadi" />
