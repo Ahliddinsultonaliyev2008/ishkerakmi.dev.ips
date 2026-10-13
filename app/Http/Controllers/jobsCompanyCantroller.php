@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobRequest;
 use App\Services\jobsCompanyServices;
-
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class jobsCompanyCantroller extends Controller
 {
@@ -15,25 +14,26 @@ class jobsCompanyCantroller extends Controller
 
     function show($id): JsonResponse
     {
-        return $this ->jobsCompanyServices ->show($id);
+        return $this->jobsCompanyServices->show($id);
     }
 
     function all(): JsonResponse
     {
-        return $this ->jobsCompanyServices ->all();
+        return $this->jobsCompanyServices->all();
     }
 
-    function store(Request $request): JsonResponse
+    function store(JobRequest $request): JsonResponse
     {
-        return $this->jobsCompanyServices->store($request ->post());
+        return $this->jobsCompanyServices->store($request->validated());
     }
 
-    function update (Request $request, $id): JsonResponse
+    function update(JobRequest $request, $id): JsonResponse
     {
-        return $this->jobsCompanyServices->update($request ->post(), $id);
+        return $this->jobsCompanyServices->update($request->validated(), $id);
     }
+
     function destroy($id): JsonResponse
     {
-        return $this ->jobsCompanyServices ->destroy($id);
+        return $this->jobsCompanyServices->destroy($id);
     }
 }

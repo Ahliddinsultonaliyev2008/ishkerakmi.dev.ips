@@ -13,11 +13,15 @@ class JobsFactory extends Factory
     public function definition(): array
     {
         return [
-            'user' => $this->faker->randomNumber(),
+            'name' => $this->faker->jobTitle(),
             'profession' => $this->faker->word(),
-            'experience' => $this->faker->word(),
+            'type' => $this->faker->word(),
             'address' => $this->faker->address(),
             'pay' => $this->faker->randomNumber(),
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->safeEmail(),
+            'experience' => $this->faker->word(),
+            'language' => $this->faker->languageCode(),
             'description' => $this->faker->text(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

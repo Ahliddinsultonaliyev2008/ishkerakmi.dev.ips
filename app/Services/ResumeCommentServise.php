@@ -52,7 +52,7 @@ class ResumeCommentServise
         ]);
 
 
-        if (!$comment->exists())
+        if (!$comment->exists)
             return response()->json([
                 'success' => false,
                 'massage' => "Create resume comment error"
@@ -76,7 +76,7 @@ class ResumeCommentServise
                 'massage' => "User not found"
             ], 404);
 
-        $comment = Comment::where('id', $comment_id)-> first();
+        $comment = Comment::where('id', $comment_id)->where('user_id', $user_id)->first();
 
 
         if (is_null($comment))

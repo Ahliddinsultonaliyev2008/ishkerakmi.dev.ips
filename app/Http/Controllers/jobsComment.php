@@ -15,7 +15,7 @@ class jobsComment extends Controller
 
     function index(Request $request)
     {
-        return $this -> jobsCommentServise ->index($request ->post());
+        return $this -> jobsCommentServise ->index($request->all());
     }
 
     function store(Request $request)

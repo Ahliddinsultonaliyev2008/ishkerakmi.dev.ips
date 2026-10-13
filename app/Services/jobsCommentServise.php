@@ -44,7 +44,7 @@ class jobsCommentServise
             'content' => $post['content'],
         ]);
 
-        if (!$comment->exists()) {
+        if (!$comment->exists) {
             return response()->json([
                 'success' => false,
                 'message' => "Create jobs comment error"
@@ -68,7 +68,7 @@ class jobsCommentServise
                 'massage' => "Company not found"
             ], 404);
 
-        $comment = Comment::where('id', $comment_id)->first();
+        $comment = Comment::where('id', $comment_id)->where('company_id', $company_id)->first();
 
 
         if (is_null($comment))
@@ -102,7 +102,7 @@ class jobsCommentServise
                 'massage' => "Company not found"
             ], 404);
 
-        $comment = Comment::where('id', $comment_id)->first();
+        $comment = Comment::where('id', $comment_id)->where('company_id', $company_id)->first();
         if (is_null($comment))
             return response()->json([
                 'success' => false,

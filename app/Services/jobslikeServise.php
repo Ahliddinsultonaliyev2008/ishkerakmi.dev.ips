@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Comment;
 use App\Models\Like;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class jobslikeServise
@@ -48,7 +46,7 @@ class jobslikeServise
                 'massage' => "Company not found"
             ], 404);
 
-        $like = Like::where('id', $comment_id)->first();
+        $like = Like::where('id', $comment_id)->where('company_id', $company_id)->first();
         if (is_null($like))
             return response()->json([
                 'success' => false,

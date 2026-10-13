@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Services\CompanyProfileServices;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CompanyProfileController extends Controller
 {
@@ -21,7 +20,7 @@ class CompanyProfileController extends Controller
             return response()->json([
                 "success" => false,
                 'message' => "Company Profile error"
-            ]);
+            ], 404);
         }
 
         return response()->json([

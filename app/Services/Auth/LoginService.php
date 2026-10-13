@@ -54,7 +54,7 @@ class LoginService
             'message' => "User login success",
             'token' => $token,
             'user_id' => $user->id,
-        ], 201);
+        ]);
 
     }
 

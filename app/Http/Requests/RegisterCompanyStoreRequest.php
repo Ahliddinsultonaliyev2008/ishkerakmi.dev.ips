@@ -18,10 +18,10 @@ class RegisterCompanyStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:30|min:2',
             'image' => 'required|string',
-            'email' => 'required|string|max:50|min:11',
+            'email' => 'required|email|max:50',
             'password' => 'required|string|confirmed|min:8|max:24',
             'profession' => 'required|string|max:30|min:2',
-            'admin' => 'required|string|max:25|min_digits:4'
+            'admin' => 'required|string|min:4|max:25|unique:companies,admin'
         ];
     }
 

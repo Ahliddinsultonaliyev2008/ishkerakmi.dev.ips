@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Comment;
 use App\Models\Like;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
-class resumelikeServies
+class ResumelikeServies
 {
     function store($post): JsonResponse
     {
@@ -27,7 +26,7 @@ class resumelikeServies
             ]);
 
 
-        if (!$like->exists())
+        if (!$like->exists)
             return response()->json([
                 'success' => false,
                 'massage' => "Create resume like error"

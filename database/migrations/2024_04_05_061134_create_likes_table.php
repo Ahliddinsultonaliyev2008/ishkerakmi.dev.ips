@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->foreignId('job_id')->nullable()->constrained();
-            $table->foreignId('resume_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('job_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('resume_id')->nullable()->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('likes');
             $table->timestamps();
         });

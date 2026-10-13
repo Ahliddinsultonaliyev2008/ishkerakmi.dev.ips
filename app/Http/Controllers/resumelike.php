@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\resumelikeServies;
+use App\Services\ResumelikeServies;
 use Illuminate\Http\Request;
 
 class resumelike extends Controller
 {
-    public function __construct(protected resumelikeServies $resumelikeServise)
+    public function __construct(protected ResumelikeServies $resumelikeServise)
     {
 
     }

@@ -4,6 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return config('');
+    return response()->json(['name' => config('app.name')]);
 });
 

@@ -12,6 +12,10 @@ class Company extends Model
 
     protected $guarded = ['id'];
 
+    protected $hidden = [
+        'password',
+    ];
+
     public function jobs(): HasMany
     {
         return $this->hasMany(Jobs::class);

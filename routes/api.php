@@ -7,17 +7,15 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\jobsComment;
 use App\Http\Controllers\jobslike;
-use App\Http\Controllers\likecontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResumeCantroller;
 use App\Http\Controllers\ResumeComment;
 use App\Http\Controllers\jobsCompanyCantroller;
 use App\Http\Controllers\resumelike;
-use App\Http\Controllers\userlike;
 use Illuminate\Support\Facades\Route;
 
 
-Route::post('register', [RegisterController::class, 'register'])->name('re');
+Route::post('register', [RegisterController::class, 'register'])->name('register');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -42,10 +40,10 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('register/company', [RegisterCompanyController::class, 'registercompany'])->name('register.company');
-Route::post('login', [LoginCompanyController::class, 'logincompany'])->name('login.company');
+Route::post('login/company', [LoginCompanyController::class, 'logincompany'])->name('login.company');
 
 
-Route::middleware(['beckauth'])->prefix('company')->name('company')->group(callback: function (){
+Route::middleware(['beckauth'])->prefix('company')->name('company.')->group(function () {
     Route::post('profile', [CompanyProfileController::class, 'profilecompany'])->name('profile.company');
 
     Route::get('resume/{id}', [jobsCompanyCantroller::class, 'show'])->name('resume.company.show');
